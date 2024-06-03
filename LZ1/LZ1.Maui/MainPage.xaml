@@ -30,6 +30,17 @@
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Fill" />
+            <Button
+                x:Name="DecrementBtn"
+                Text="Decrement"
+                SemanticProperties.Hint="Decreases the count"
+                Clicked="OnDecrementClicked"
+                HorizontalOptions="Fill" />
+            <Label
+                x:Name="CounterLabel"
+                Text="Clicked 0 times"
+                Style="{StaticResource Body}"
+                HorizontalOptions="Center" />
         </VerticalStackLayout>
     </ScrollView>
 

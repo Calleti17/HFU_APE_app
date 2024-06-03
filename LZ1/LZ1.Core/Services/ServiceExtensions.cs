@@ -1,13 +1,14 @@
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LZ1.Core.Services;
-
-public static class ServiceExtensions
+namespace LZ1.Core.Services
 {
-    public static IServiceCollection AddServices(this IServiceCollection serviceCollection)
+    public static class ServiceExtensions
     {
-        return serviceCollection
-            .AddSingleton<ICounterService, CounterService>()
-            .AddSingleton<ICounterState, CounterState>();
+        public static IServiceCollection AddServices(this IServiceCollection serviceCollection)
+        {
+            return serviceCollection
+                .AddSingleton<ICounterService, CounterService>()
+                .AddSingleton<ICounterState, CounterState>();
+        }
     }
 }

@@ -1,10 +1,13 @@
-namespace LZ1.Core.Services;
-
-public interface ICounterService
+namespace LZ1.Core.Services
 {
-    string GetLabel();
+    public interface ICounterService
+    {
+        string GetLabel();
 
-    void Increment();
+        void Increment();
+        void Decrement(); 
 
-    Task<bool> TryIncrement();
+        Task<bool> TryIncrement();
+        Task<bool> TryDecrement(); 
+    }
 }

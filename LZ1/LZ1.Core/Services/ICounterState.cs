@@ -1,8 +1,10 @@
-namespace LZ1.Core.Services;
-
-public interface ICounterState
+namespace LZ1.Core.Services
 {
-    public int Count { get; }
+    public interface ICounterState
+    {
+        int Count { get; }
 
-    void Increment();
+        void Increment();
+        void Decrement(); 
+    }
 }

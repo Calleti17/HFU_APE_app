@@ -1,42 +1,58 @@
-namespace LZ1.Core.Services;
-
-internal class CounterService : ICounterService
+namespace LZ1.Core.Services
 {
-    private const string ConfirmationMessage = "Are you sure you want to to increment?";
-
-    private readonly ICounterState _state;
-    private readonly IDialogService _dialogService;
-
-    public CounterService(ICounterState state, IDialogService dialogService)
+    internal class CounterService : ICounterService
     {
-        _state = state ?? throw new ArgumentNullException(nameof(state));
-        _dialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService));
-    }
+        private const string ConfirmationMessageIncrement = "Are you sure you want to increment?";
+        private const string ConfirmationMessageDecrement = "Are you sure you want to decrement?";
 
-    /// <inheritdoc/>
-    public void Increment()
-    {
-        _state.Increment();
-    }
+        private readonly ICounterState _state;
+        private readonly IDialogService _dialogService;
 
-    /// <inheritdoc/>
-    public async Task<bool> TryIncrement()
-    {
-        var result = await _dialogService.AskAsync(ConfirmationMessage);
-
-        if (result)
+        public CounterService(ICounterState state, IDialogService dialogService)
         {
-            Increment();
+            _state = state ?? throw new ArgumentNullException(nameof(state));
+            _dialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService));
         }
 
-        return result;
-    }
+        public void Increment()
+        {
+            _state.Increment();
+        }
 
-    /// <inheritdoc/>
-    public string GetLabel()
-    {
-        var suffix = _state.Count == 2 ? string.Empty : "s";
+        public void Decrement()
+        {
+            _state.Decrement();
+        }
 
-        return $"Clicked {_state.Count} time{suffix}";
+        public async Task<bool> TryIncrement()
+        {
+            var result = await _dialogService.AskAsync(ConfirmationMessageIncrement);
+
+            if (result)
+            {
+                Increment();
+            }
+
+            return result;
+        }
+
+        public async Task<bool> TryDecrement()
+        {
+            var result = await _dialogService.AskAsync(ConfirmationMessageDecrement);
+
+            if (result && _state.Count > 0)
+            {
+                Decrement();
+                return true;
+            }
+
+            return false;
+        }
+
+        public string GetLabel()
+        {
+            var suffix = _state.Count == 1 ? string.Empty : "s";
+            return $"Clicked {_state.Count} time{suffix}";
+        }
     }
 }

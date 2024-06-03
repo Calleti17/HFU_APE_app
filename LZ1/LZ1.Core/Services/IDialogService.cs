@@ -1,8 +1,8 @@
-﻿namespace LZ1.Core.Services;
-
-public interface IDialogService
+﻿namespace LZ1.Core.Services
 {
-    Task<bool> AskAsync(string message);
-
-    Task Show(string message);
+    public interface IDialogService
+    {
+        Task<bool> AskAsync(string message);
+        Task Show(string message);
+    }
 }
