@@ -39,7 +39,6 @@
             <Label
                 x:Name="CounterLabel"
                 Text="Clicked 0 times"
-                Style="{StaticResource Body}"
                 HorizontalOptions="Center" />
         </VerticalStackLayout>
     </ScrollView>
