@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:MLZ.ViewModel"
+             x:Class="MLZ.View.MainPage">
+
+    <ContentPage.BindingContext>
+        <viewModel:MLZInventoryViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid>
+        <Button Text="Hinzufügen" HorizontalOptions="Start" Margin="26,28,0,0" VerticalOptions="Start" HeightRequest="46" WidthRequest="115" Command="{Binding AddAppCommand}" IsEnabled="{Binding CanAdd}" />
+
+        <Entry HorizontalOptions="Start" Margin="127,100,0,0" VerticalOptions="Start" WidthRequest="136" IsEnabled="{Binding IsFormEnabled}" Text="{Binding SelectedApp.Fisch, Mode=TwoWay}" />
+
+        <Entry HorizontalOptions="Start" Margin="267,100,0,0" VerticalOptions="Start" WidthRequest="136" IsEnabled="{Binding IsFormEnabled}" Text="{Binding SelectedApp.See, Mode=TwoWay}" />
+
+        <Entry HorizontalOptions="Start" Margin="407,100,0,0" VerticalOptions="Start" WidthRequest="136" IsEnabled="{Binding IsFormEnabled}" Text="{Binding SelectedApp.Anzahl, Mode=TwoWay}" />
+
+        <Entry HorizontalOptions="Start" Margin="547,100,0,0" VerticalOptions="Start" WidthRequest="136" IsEnabled="{Binding IsFormEnabled}" Text="{Binding SelectedApp.Description, Mode=TwoWay}" />
+
+        <Label Text="{Binding TotalSum}" HorizontalOptions="Start" Margin="127,164,0,0" VerticalOptions="Start" WidthRequest="115" />
+        <Label Text="Name" HorizontalOptions="Start" Margin="26,100,0,0" VerticalOptions="Start" HeightRequest="34" WidthRequest="75" />
+        <Label Text="Plattform" HorizontalOptions="Start" Margin="267,70,0,0" VerticalOptions="Start" HeightRequest="34" WidthRequest="75" />
+        <Label Text="Preis" HorizontalOptions="Start" Margin="407,70,0,0" VerticalOptions="Start" HeightRequest="34" WidthRequest="75" />
+        <Label Text="Beschreibung" HorizontalOptions="Start" Margin="547,70,0,0" VerticalOptions="Start" HeightRequest="34" WidthRequest="112" />
+        <Label Text="Summe" HorizontalOptions="Start" Margin="26,159,0,0" VerticalOptions="Start" HeightRequest="44" WidthRequest="96" />
+
+        <Button Text="App Bearbeiten" HorizontalOptions="Start" Margin="26,242,0,0" VerticalOptions="Start" HeightRequest="26" WidthRequest="115" Command="{Binding EditAppCommand}" IsEnabled="{Binding CanEditOrDelete}" />
+        <Button Text="App Löschen" HorizontalOptions="Start" Margin="26,307,0,0" VerticalOptions="Start" WidthRequest="115" HeightRequest="28" Command="{Binding DeleteAppCommand}" IsEnabled="{Binding CanEditOrDelete}" />
+        <Button Text="Bestätigen" HorizontalOptions="Start" Margin="147,28,0,0" VerticalOptions="Start" HeightRequest="46" WidthRequest="115" Command="{Binding ConfirmCommand}" IsEnabled="{Binding IsConfirmEnabled}" />
+        <Button Text="Abbrechen" HorizontalOptions="Start" Margin="267,28,0,0" VerticalOptions="Start" HeightRequest="46" WidthRequest="115" Command="{Binding CancelCommand}" IsEnabled="{Binding IsConfirmEnabled}" />
+
+        <CollectionView ItemsSource="{Binding Apps}" SelectionMode="Single" SelectedItem="{Binding SelectedApp}" HorizontalOptions="Start" Margin="167,200,0,0" VerticalOptions="Start" WidthRequest="600" HeightRequest="200">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="200" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Text="{Binding Fisch}" />
+                        <Label Grid.Column="1" Text="{Binding See}" />
+                        <Label Grid.Column="2" Text="{Binding Anzahl}" />
+                        <Label Grid.Column="3" Text="{Binding Description}" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Label HorizontalOptions="Start" Margin="387,28,0,0" VerticalOptions="Start" WidthRequest="380" Text="Textlänge >20 = Fehlermeldung!!" />
+    </Grid>
+</ContentPage>
