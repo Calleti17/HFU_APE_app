@@ -4,7 +4,7 @@ namespace Core.Services
 {
     public interface IPersonService
     {
-        void Save(Person person);
-        List<Person> Load(); 
+        Task Save(Person person);
+        Task<List<Person>> Load();
     }
 }

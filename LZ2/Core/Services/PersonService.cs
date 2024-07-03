@@ -11,16 +11,25 @@ namespace Core.Services
             _localStorage = localStorage;
         }
 
-        public List<Person> Load()
+        public async Task<List<Person>> Load()
         {
-            throw new NotImplementedException();
+            await _localStorage.Initialize();
+
+            var people = await _localStorage.LoadAll();
+
+            if (people.Count == 0)
+            {
+                people.Add(new Person());
+            }
+
+            return people;
         }
 
-        public void Save(Person person)
+        public Task Save(Person person)
         {
             if (person == null) throw new ArgumentNullException(nameof(person));
 
-            _localStorage.SavePerson(person);
+            return _localStorage.Save(person);
         }
     }
 }
