@@ -16,6 +16,6 @@ public interface ILocalStorage
     Task<List<Person>> LoadAll();
 
     Task<bool> DeleteAll();
+
     Task Initialize();
-    void SavePerson(Person person);
 }

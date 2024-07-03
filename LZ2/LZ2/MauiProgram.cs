@@ -23,8 +23,6 @@ public static class MauiProgram
         builder.Services
             .AddDefaultServices()
             .AddSingleton<MainPage>();
-        
-        builder.Services.AddScoped<IPersonService, PersonService>();
 #if DEBUG
         builder.Logging.AddDebug();
 #endif

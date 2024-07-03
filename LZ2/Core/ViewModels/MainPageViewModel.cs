@@ -7,7 +7,7 @@ namespace Core;
 
 public partial class MainPageViewModel : ViewModelBase
 {
-    private readonly ILocalStorage _localStorage;
+    private readonly IPersonService _personService;
     private string _firstName = string.Empty;
     private string _lastName = string.Empty;
     private int _age;
@@ -19,9 +19,9 @@ public partial class MainPageViewModel : ViewModelBase
         // throw new InvalidOperationException("This constructor is for detecting binding in XAML and should never be called.");
     }
 
-    public MainPageViewModel(ILocalStorage localStorage)
+    public MainPageViewModel(IPersonService personService)
     {
-        _localStorage = localStorage ?? throw new ArgumentNullException(nameof(localStorage));
+        _personService = personService ?? throw new ArgumentNullException(nameof(personService));
     }
 
     public string FirstName
@@ -61,6 +61,7 @@ public partial class MainPageViewModel : ViewModelBase
         get => _postalCode;
         set => SetField(ref _postalCode, value);
     }
+
     public bool IsReady => SelectedItem != null;
 
     public ObservableCollection<Person> Items { get; private set; } = new();
@@ -90,17 +91,6 @@ public partial class MainPageViewModel : ViewModelBase
         }
     }
 
-
-
-    private void IncrementAge()
-    {
-        if (_selectedItem != null)
-        {
-            Age++;
-            Save();
-        }
-    }
-
     [RelayCommand]
     public async Task EnsureModelLoaded()
     {
@@ -108,9 +98,7 @@ public partial class MainPageViewModel : ViewModelBase
         {
             try
             {
-                await _localStorage.Initialize();
-
-                var people = await _localStorage.LoadAll();
+                var people = await _personService.Load();
 
                 if (people.Count == 0)
                 {
@@ -148,7 +136,7 @@ public partial class MainPageViewModel : ViewModelBase
         model.Age = Age;
         model.PostalCode = PostalCode;
 
-        await _localStorage.Save(model);
+        await _personService.Save(model);
     }
 
     public void Add()
