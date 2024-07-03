@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34916.146
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MLZ", "MLZ\MLZ.csproj", "{46618158-DD5B-4F45-9216-95B61DC3C199}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MLZ", "MLZ\MLZ.csproj", "{46618158-DD5B-4F45-9216-95B61DC3C199}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MLZ.Tests", "MLZ.Tests\MLZ.Tests.csproj", "{A8AA947E-6B21-473E-9073-0FF6C9FE1CEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MLZ.Core", "MLZ.Core\MLZ.Core.csproj", "{8D2DEDEE-EF58-4233-9D66-9E4677B80AE4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,6 +21,14 @@ Global
 		{46618158-DD5B-4F45-9216-95B61DC3C199}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46618158-DD5B-4F45-9216-95B61DC3C199}.Release|Any CPU.Build.0 = Release|Any CPU
 		{46618158-DD5B-4F45-9216-95B61DC3C199}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{A8AA947E-6B21-473E-9073-0FF6C9FE1CEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8AA947E-6B21-473E-9073-0FF6C9FE1CEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8AA947E-6B21-473E-9073-0FF6C9FE1CEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8AA947E-6B21-473E-9073-0FF6C9FE1CEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D2DEDEE-EF58-4233-9D66-9E4677B80AE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D2DEDEE-EF58-4233-9D66-9E4677B80AE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D2DEDEE-EF58-4233-9D66-9E4677B80AE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D2DEDEE-EF58-4233-9D66-9E4677B80AE4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

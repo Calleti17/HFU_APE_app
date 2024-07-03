@@ -1,0 +1,69 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MLZ.ViewModels;assembly=MLZ.Core"
+             x:Class="MLZ.Views.MainPage"
+             BackgroundColor="White">
+
+    <ContentPage.BindingContext>
+        <vm:FischViewModel />
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout Padding="20" Spacing="10">
+        <Label Text="Fischzähler" FontSize="24" TextColor="Purple" />
+
+        <!-- Eingabefelder -->
+        <Entry Text="{Binding SelectedFisch.Name}" Placeholder="Fisch" TextColor="Black" />
+        <Entry Text="{Binding SelectedFisch.Lake}" Placeholder="See" TextColor="Black" />
+        <Entry Text="{Binding SelectedFisch.Method}" Placeholder="Art" TextColor="Black" />
+        <DatePicker Date="{Binding SelectedFisch.Date}" />
+
+        <!-- Buttons -->
+        <Grid ColumnSpacing="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Text="Hinzufügen" Command="{Binding AddFischCommand}" IsEnabled="{Binding CanAddOrEditFisch}" Grid.Column="0" WidthRequest="120" HeightRequest="50" />
+            <Button Text="Bearbeiten" Command="{Binding EditFischCommand}" IsEnabled="{Binding CanAddOrEditFisch}" Grid.Column="1" WidthRequest="120" HeightRequest="50" />
+            <Button Text="Löschen" Command="{Binding DeleteFischCommand}" IsEnabled="{Binding CanAddOrEditFisch}" Grid.Column="2" WidthRequest="120" HeightRequest="50" />
+        </Grid>
+
+        <!-- ListView -->
+        <ListView ItemsSource="{Binding Fische}" SelectedItem="{Binding SelectedFisch}" HeightRequest="200" Margin="0,20,0,0">
+            <ListView.Header>
+                <Grid BackgroundColor="Black" Padding="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="3*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Fisch" Grid.Column="0" FontAttributes="Bold" TextColor="White"/>
+                    <Label Text="See" Grid.Column="1" FontAttributes="Bold" TextColor="White"/>
+                    <Label Text="Art" Grid.Column="2" FontAttributes="Bold" TextColor="White"/>
+                    <Label Text="Datum" Grid.Column="3" FontAttributes="Bold" TextColor="White"/>
+                </Grid>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="3*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="{Binding Name}" Grid.Column="0" TextColor="Black" />
+                            <Label Text="{Binding Lake}" Grid.Column="1" TextColor="Black" />
+                            <Label Text="{Binding Method}" Grid.Column="2" TextColor="Black" />
+                            <Label Text="{Binding FormattedDate}" Grid.Column="3" TextColor="Black" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </VerticalStackLayout>
+</ContentPage>
