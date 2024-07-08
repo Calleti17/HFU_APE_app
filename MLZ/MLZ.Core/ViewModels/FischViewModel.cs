@@ -16,9 +16,9 @@ namespace MLZ.ViewModels
         {
             Fische = new ObservableCollection<Fisch>
             {
-                new Fisch { Id = 1, Name = "Forelle", Lake = "Bodensee", Method = "Angeln", Date = DateTime.Now },
-                new Fisch { Id = 2, Name = "Hecht", Lake = "Ammersee", Method = "Netz", Date = DateTime.Now },
-                new Fisch { Id = 3, Name = "Karpfen", Lake = "Chiemsee", Method = "Angeln", Date = DateTime.Now }
+                new Fisch { Id = 1, Name = "Forelle", Lake = "Bodensee", Method = "Angeln", Date = DateTime.Now,Count = 3 },
+                new Fisch { Id = 2, Name = "Hecht", Lake = "Ammersee", Method = "Netz", Date = DateTime.Now,Count = 2 },
+                new Fisch { Id = 3, Name = "Karpfen", Lake = "Chiemsee", Method = "Angeln", Date = DateTime.Now , Count = 1}
             };
             AddFischCommand = new AsyncRelayCommand(AddFischAsync);
             EditFischCommand = new AsyncRelayCommand(EditFischAsync);
@@ -52,6 +52,12 @@ namespace MLZ.ViewModels
         {
             if (SelectedFisch != null && CanAddOrEditFisch)
             {
+                if (SelectedFisch.Name.Length > 20 || SelectedFisch.Lake.Length > 20 || SelectedFisch.Method.Length > 20)
+                {
+                    Debug.WriteLine("Validation failed: Fields exceed maximum length");
+                    return;
+                }
+
                 Debug.WriteLine($"Adding Fisch: {SelectedFisch.Name}");
                 Fische.Add(new Fisch
                 {
@@ -59,9 +65,10 @@ namespace MLZ.ViewModels
                     Name = SelectedFisch.Name,
                     Lake = SelectedFisch.Lake,
                     Method = SelectedFisch.Method,
-                    Date = SelectedFisch.Date
+                    Date = SelectedFisch.Date,
+                    Count = SelectedFisch.Count
                 });
-                SelectedFisch = new Fisch { Date = DateTime.Now }; // Reset the selected fish for new entry
+                SelectedFisch = new Fisch { Date = DateTime.Now }; 
                 await Task.CompletedTask;
             }
         }
@@ -71,7 +78,7 @@ namespace MLZ.ViewModels
             if (SelectedFisch != null && CanAddOrEditFisch)
             {
                 Debug.WriteLine($"Editing Fisch: {SelectedFisch.Name}");
-                // Hier würden Sie normalerweise die Logik zum Bearbeiten des Fisches hinzufügen.
+                
                 var fischToEdit = Fische.FirstOrDefault(f => f.Id == SelectedFisch.Id);
                 if (fischToEdit != null)
                 {
@@ -79,6 +86,7 @@ namespace MLZ.ViewModels
                     fischToEdit.Lake = SelectedFisch.Lake;
                     fischToEdit.Method = SelectedFisch.Method;
                     fischToEdit.Date = SelectedFisch.Date;
+                    fischToEdit.Count = SelectedFisch.Count;
                 }
                 await Task.CompletedTask;
             }
@@ -90,7 +98,7 @@ namespace MLZ.ViewModels
             {
                 Debug.WriteLine($"Deleting Fisch: {SelectedFisch.Name}");
                 Fische.Remove(SelectedFisch);
-                SelectedFisch = new Fisch { Date = DateTime.Now }; // Reset after deletion
+                SelectedFisch = new Fisch { Date = DateTime.Now }; 
                 await Task.CompletedTask;
             }
         }

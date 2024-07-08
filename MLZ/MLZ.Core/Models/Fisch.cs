@@ -19,6 +19,9 @@ namespace MLZ.Core.Models
 
         public DateTime Date { get; set; }
 
+        public int Count { get; set; } 
         public string FormattedDate => Date.ToString("dd.MM.yyyy HH:mm:ss");
+
+        
     }
 }

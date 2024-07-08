@@ -4,18 +4,21 @@
              x:Class="MLZ.Views.MainPage"
              BackgroundColor="White">
 
+
     <ContentPage.BindingContext>
         <vm:FischViewModel />
     </ContentPage.BindingContext>
 
     <VerticalStackLayout Padding="20" Spacing="10">
-        <Label Text="Fischzähler" FontSize="24" TextColor="Purple" />
+        <Label Text="Fischzähler" FontSize="24" TextColor="Blue" />
+        <Label Text="Text länge >20 ungültig" FontSize="10" TextColor="Blue" />
 
         <!-- Eingabefelder -->
         <Entry Text="{Binding SelectedFisch.Name}" Placeholder="Fisch" TextColor="Black" />
         <Entry Text="{Binding SelectedFisch.Lake}" Placeholder="See" TextColor="Black" />
         <Entry Text="{Binding SelectedFisch.Method}" Placeholder="Art" TextColor="Black" />
-        <DatePicker Date="{Binding SelectedFisch.Date}" />
+        <Entry Text="{Binding SelectedFisch.Count}" Placeholder="Anzahl" TextColor="Black" Keyboard="Numeric" />
+        <DatePicker Date="{Binding SelectedFisch.Date}" TextColor="Black" />
 
         <!-- Buttons -->
         <Grid ColumnSpacing="10">
@@ -35,15 +38,19 @@
             <ListView.Header>
                 <Grid BackgroundColor="Black" Padding="5">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="2*" />
                         <ColumnDefinition Width="2*" />
                         <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
                     </Grid.ColumnDefinitions>
-                    <Label Text="Fisch" Grid.Column="0" FontAttributes="Bold" TextColor="White"/>
-                    <Label Text="See" Grid.Column="1" FontAttributes="Bold" TextColor="White"/>
-                    <Label Text="Art" Grid.Column="2" FontAttributes="Bold" TextColor="White"/>
-                    <Label Text="Datum" Grid.Column="3" FontAttributes="Bold" TextColor="White"/>
+                    <Label Text="Fisch" Grid.Column="0" FontAttributes="Bold" TextColor="White" HorizontalOptions="Center" />
+                    <Label Text="See" Grid.Column="1" FontAttributes="Bold" TextColor="White" HorizontalOptions="Center" />
+                    <Label Text="Art" Grid.Column="2" FontAttributes="Bold" TextColor="White" HorizontalOptions="Center" />
+                    <Label Text="Datum" Grid.Column="3" FontAttributes="Bold" TextColor="White" HorizontalOptions="Center" />
+                    <Label Text="Anzahl" Grid.Column="4" FontAttributes="Bold" TextColor="White" HorizontalOptions="Center" />
+                    <Label Text="Zähler" Grid.Column="5" FontAttributes="Bold" TextColor="White" HorizontalOptions="Center" />
                 </Grid>
             </ListView.Header>
             <ListView.ItemTemplate>
@@ -51,15 +58,19 @@
                     <ViewCell>
                         <Grid Padding="5">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="1*" />
                                 <ColumnDefinition Width="2*" />
                                 <ColumnDefinition Width="2*" />
                                 <ColumnDefinition Width="3*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
                             </Grid.ColumnDefinitions>
-                            <Label Text="{Binding Name}" Grid.Column="0" TextColor="Black" />
-                            <Label Text="{Binding Lake}" Grid.Column="1" TextColor="Black" />
-                            <Label Text="{Binding Method}" Grid.Column="2" TextColor="Black" />
-                            <Label Text="{Binding FormattedDate}" Grid.Column="3" TextColor="Black" />
+                            <Label Text="{Binding Name}" Grid.Column="0" TextColor="Black" HorizontalOptions="Center" />
+                            <Label Text="{Binding Lake}" Grid.Column="1" TextColor="Black" HorizontalOptions="Center" />
+                            <Label Text="{Binding Method}" Grid.Column="2" TextColor="Black" HorizontalOptions="Center" />
+                            <Label Text="{Binding FormattedDate}" Grid.Column="3" TextColor="Black" HorizontalOptions="Center" />
+                            <Label Text="{Binding Count}" Grid.Column="4" TextColor="Black" HorizontalOptions="Center" />
+                            <Label Text="{Binding Id}" Grid.Column="5" TextColor="Black" HorizontalOptions="Center" />
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
