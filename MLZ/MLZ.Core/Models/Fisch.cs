@@ -6,7 +6,7 @@ namespace MLZ.Core.Models
     public class Fisch
     {
         [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [MaxLength(20)]
         public string Name { get; set; } = string.Empty;

@@ -17,7 +17,7 @@ namespace Core.Tests
             var localStorage = await GetLocalStorage();
             var fisch = CreateFisch();
 
-            Assert.That(fisch.Id, Is.Zero);
+            Assert.That(fisch.Id, Is.Null);
 
             var saved = await localStorage.Save(fisch);
             Assert.Multiple(() =>
@@ -26,7 +26,7 @@ namespace Core.Tests
                 Assert.That(fisch.Id, Is.Not.Zero);
             });
 
-            var loadedFisch = await localStorage.Load(fisch.Id);
+            var loadedFisch = await localStorage.Load(fisch.Id.Value);
 
             Assert.That(loadedFisch.Id, Is.EqualTo(fisch.Id));
         }
@@ -37,7 +37,7 @@ namespace Core.Tests
             var localStorage = await GetLocalStorage();
             var fisch = CreateFisch();
 
-            Assert.That(fisch.Id, Is.Zero);
+            Assert.That(fisch.Id, Is.Null);
 
             var saved = await localStorage.Save(fisch);
             Assert.Multiple(() =>
@@ -46,7 +46,7 @@ namespace Core.Tests
                 Assert.That(fisch.Id, Is.Not.Zero);
             });
 
-            var loadedFisch = await localStorage.TryLoad(fisch.Id);
+            var loadedFisch = await localStorage.TryLoad(fisch.Id.Value);
 
             Assert.Multiple(() =>
             {
@@ -61,7 +61,7 @@ namespace Core.Tests
             var localStorage = await GetLocalStorage();
             var fisch = CreateFisch();
 
-            Assert.That(fisch.Id, Is.Zero);
+            Assert.That(fisch.Id, Is.Null);
 
             var saved = await localStorage.Save(fisch);
             Assert.Multiple(() =>
@@ -70,7 +70,7 @@ namespace Core.Tests
                 Assert.That(fisch.Id, Is.Not.Zero);
             });
 
-            var loadedFisch = await localStorage.Load(fisch.Id);
+            var loadedFisch = await localStorage.Load(fisch.Id.Value);
 
             Assert.That(loadedFisch.Id, Is.EqualTo(fisch.Id));
 
@@ -78,7 +78,7 @@ namespace Core.Tests
 
             Assert.That(deleted, "Object was not deleted.");
 
-            var fischWithId = await localStorage.TryLoad(fisch.Id);
+            var fischWithId = await localStorage.TryLoad(fisch.Id.Value);
 
             Assert.That(fischWithId, Is.Null, "Object should no longer exist.");
         }
